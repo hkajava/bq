@@ -5,20 +5,50 @@ import { Meteor } from 'meteor/meteor';
 export default class BerryQuiz extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.getimage();
+    this.state = { imageURL: '' };
+    // this.state.imageURL = this.getimage();
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000,
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   getimage() {
     this.hello = 'hello';
-    let fetchedImage = Meteor.call('getBerry');
-    console.log('file BerryQuiz, function getimage, fetchedImage: ', fetchedImage);
+    Meteor.call('getBerry', (error, result) => {
+      if (error) {
+        console.log(error.reason);
+        return;
+      } else {
+        console.log('getBerry returned result: ', result);
+        if(result != undefined) {
+          console.log('JEEJEE');
+          this.setState({
+            imageURL: result
+          });
+        }
+      }
+    });
   }
+
+  tick() {
+    this.getimage();
+  }
+
 
   render() {
     return (
       <div>
         <h1>BerryQuiz!</h1>
+        <h2>imageURL: {this.state.imageURL} </h2>
+        <img alt='some berry should be displayed here' src={this.state.imageURL} />
       </div>
     );
   }

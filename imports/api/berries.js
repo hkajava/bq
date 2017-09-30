@@ -21,12 +21,12 @@ Meteor.methods({
 
     if (Meteor.isServer) {
       console.log('inside server, method getBerry');
-      let berryfilepath = '/home/dfm/code/bq/public/berry_images/mustikka_blueberry.jpg';
-      const data = fs.readFileSync(berryfilepath, 'utf8');
-      console.log('inside server, method getBerry');
+      let berryfilepath = '/berry_images/mustikka_blueberry.jpg';
+      // const data = fs.readFileSync(berryfilepath, 'utf8');
+      // console.log('inside server, method getBerry');
       return berryfilepath;
     } else {
-      console.log('inside client, method getBerry');
+      // console.log('inside client, method getBerry');
     }
 
   },
