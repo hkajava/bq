@@ -10,6 +10,47 @@ export default class BerryQuiz extends Component {
   }
 
   componentDidMount() {
+    this.getImage();
+  }
+
+  getImage() {
+    this.hello = 'hello';
+    Meteor.call('getBerry', (error, result) => {
+      if (error) {
+        console.log(error.reason);
+        return;
+      } else {
+        console.log('getBerry returned result: ', result);
+        if(result != undefined) {
+          // console.log('JEEJEE');
+          this.setState({
+            imageURL: result
+          });
+        }
+      }
+    });
+  }
+
+  getBerriesInClient() {
+    this.hello = 'hello';
+    Meteor.call('getBerriesToArray', (error, result) => {
+      if (error) {
+        console.log(error.reason);
+        return;
+      } else {
+        console.log('getBerriesToArray returned result: ', result);
+        if(result != undefined) {
+          // console.log('JEEJEE');
+          this.setState({
+            berryArray: result
+          });
+        }
+      }
+    });
+  }
+
+/*
+  componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
       1000,
@@ -29,7 +70,7 @@ export default class BerryQuiz extends Component {
       } else {
         console.log('getBerry returned result: ', result);
         if(result != undefined) {
-          console.log('JEEJEE');
+          // console.log('JEEJEE');
           this.setState({
             imageURL: result
           });
@@ -41,6 +82,7 @@ export default class BerryQuiz extends Component {
   tick() {
     this.getimage();
   }
+  */
 
 
   render() {
