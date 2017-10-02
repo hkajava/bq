@@ -29,6 +29,7 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
+
   'getBerry'() {
     // check(text, String);
 
@@ -40,22 +41,23 @@ Meteor.methods({
       return berryfilepath;
     } else {
       // console.log('inside client, method getBerry');
+      return undefined;
     }
-
+    return undefined;
   },
   'getBerriesToArray'() {
     // check(text, String);
-
+    let berryArray = [];
     if (Meteor.isServer) {
       console.log('inside server, method getThreeBerries');
-      let berryArray = Berries.find().toArray();
+      berryArray = Berries.find().fetch();
+      this.ralaa = 'ralaa';
       // const data = fs.readFileSync(berryfilepath, 'utf8');
       // console.log('inside server, method getBerry');
-      return berryArray;
     } else {
       // console.log('inside client, method getBerry');
     }
-
+    return berryArray;
   },
 
   'berries.insert'(text) {
