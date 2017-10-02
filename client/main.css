@@ -37,7 +37,7 @@ body {
 
 .container {
 
-  max-width: 600px;
+  max-width: 1024px;
 
   margin: 0 auto;
 
@@ -51,11 +51,11 @@ body {
 
 header {
 
-  background: #d2edf4;
+  background: #logind2edf4;
 
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
 
-  padding: 20px 15px 15px 15px;
+  /*padding: 20px 15px 15px 15px;*/
 
   position: relative;
 
@@ -65,15 +65,20 @@ header {
 
 #login-buttons {
 
-  display: block;
+  display: inline;
 
 }
 
-
+div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 150px;
+    margin-left: 80px;
+}
 
 h1 {
 
-  font-size: 1.5em;
+  font-size: 3.5em;
 
   color: black;
 

@@ -30,13 +30,9 @@ class App extends Component {
     return (
       <div className="container">
         <header>
-          <h1>App</h1>
-          <AccountsUIWrapper />
-
+        <AccountsUIWrapper />
         </header>
-
         <BerryQuiz />
-
       </div>
     );
   }

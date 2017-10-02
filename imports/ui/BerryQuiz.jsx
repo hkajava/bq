@@ -103,6 +103,28 @@ export default class BerryQuiz extends Component {
     }
   }
 
+  renderthreeberries() {
+    console.log('hello from renderBerry');
+    console.log(this.state.berryArray);
+    if (this.state.berryArray != '' && this.state.berryArray.length >= 3) {
+      return(
+        <li><table>
+          <tr>
+            <td>
+              <img alt="some berry here hopefully" src={this.state.berryArray[0].berryURL} /> <br />
+            </td>
+            <td>
+              <img alt="some berry here hopefully" src={this.state.berryArray[1].berryURL} /> <br />
+            </td>
+            <td>
+              <img alt="some berry here hopefully" src={this.state.berryArray[2].berryURL} /> <br />
+            </td>
+          </tr>
+        </table></li>);
+    }
+  }
+
+
   /*
   <ul>
     {this.renderberryArray()}
@@ -125,12 +147,15 @@ export default class BerryQuiz extends Component {
     return (
       <div>
         <h1>BerryQuiz!</h1>
-        <h2>imageURL: {this.state.imageURL} </h2>
-        <img alt='some berry should be displayed here' src={this.state.imageURL} />
+        <p> This is a simple quiz application to investigate the potential of
+            Meteor/React web application technology and learn to recognize
+            Finnish wild berries. The images have been taken from <br />
+          <a target="_blank" rel="noopener noreferrer" href="http://www.luontoon.fi/marjastusjasienestys/marjastus">http://www.luontoon.fi/marjastusjasienestys/marjastus</a>
+        </p>
 
-        <h2>berryArray: </h2>
+        <h2>Which of these berries is blueberry (mustikka in Finnish)? </h2>
         <ul>
-          {this.renderberryArray()}
+          {this.renderthreeberries()}
         </ul>
 
 
