@@ -1,147 +1,123 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
+import Berry from './Berry.jsx';
 
 
 export default class BerryQuiz extends Component {
   constructor(props) {
     super(props);
     this.state =
-    { imageURL: '',
-      berryArray: '' };
-    // this.state.imageURL = this.getimage();
+    { berryArray: '',
+      correctBerryName: '',
+      correctBerryIndex: '',
+      berry1Index: '',
+      berry2Index: '',
+      berry3Index: '' };
   }
 
   componentDidMount() {
-    this.getImage();
     this.getBerriesInClient();
   }
 
-  getImage() {
-    this.hello = 'hello';
-    Meteor.call('getBerry', (error, result) => {
-      if (error) {
-        console.log(error.reason);
-        return;
-      }
-
-      console.log('getBerry returned result: ', result);
-      if (result != undefined) {
-        // console.log('JEEJEE');
-        this.setState({
-          imageURL: result
-        });
-      }
-    });
-  }
-
   getBerriesInClient() {
-    this.hello = 'hello';
     Meteor.call('getBerriesToArray', (error, result) => {
       if (error) {
         console.log(error.reason);
-        return;
-      } else {
+      } else if (result) {
         console.log('getBerriesToArray returned result: ', result);
         if(result != undefined && result != null) {
           // console.log('JEEJEE');
           this.setState({
             berryArray: result
           });
-          // this.render();
+          const berryIndexArray = this.getNextBerryIndexes(this.state.berryArray.length);
+          const chosenBerryIndex = berryIndexArray[this.randomIntFromInterval(0, 2)];
+          const chosenBerryName = this.state.berryArray[chosenBerryIndex].berry_name;
+          this.setState(
+            { correctBerryIndex: chosenBerryIndex,
+              correctBerryName: chosenBerryName,
+              berry1Index: berryIndexArray[0],
+              berry2Index: berryIndexArray[1],
+              berry3Index: berryIndexArray[2] });
         }
       }
     });
   }
 
-  /*
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000,
-    );
-  }
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  getimage() {
+  getNextBerryIndexes(numberOfBerries) {
     this.hello = 'hello';
-    Meteor.call('getBerry', (error, result) => {
-      if (error) {
-        console.log(error.reason);
-        return;
-      } else {
-        console.log('getBerry returned result: ', result);
-        if(result != undefined) {
-          // console.log('JEEJEE');
-          this.setState({
-            imageURL: result
-          });
-        }
-      }
-    });
-  }
-
-  tick() {
-    this.getimage();
-  }
-  */
-
-
-  renderberryArray() {
-    console.log('hello from renderBerry');
-    console.log(this.state.berryArray);
-    if (this.state.berryArray != '') {
-      return (this.state.berryArray.map((berry) => {
-        return (
-          <li><img alt='some berry image here hopefully' src={berry.berryURL} /> <br />
-            {berry.berry_name}
-          </li>);
-      })
-      );
+    let indexArray = [];
+    console.log('numberOfBerries: ', numberOfBerries);
+    indexArray[0] = this.randomIntFromInterval(0, numberOfBerries - 1);
+    console.log('indexArray[0]: ', indexArray[0]);
+    indexArray[1] = this.randomIntFromInterval(0, numberOfBerries - 1);
+    while (indexArray[1] == indexArray[0]) {
+      console.log('duplicate indexArray[1] recalculated');
+      indexArray[1] = this.randomIntFromInterval(0, numberOfBerries - 1);
     }
+    console.log('indexArray[1]: ', indexArray[1]);
+    indexArray[2] = this.randomIntFromInterval(0, numberOfBerries - 1);
+    while (indexArray[2] == indexArray[1] || indexArray[2] == indexArray[0]) {
+      console.log('duplicate indexArray[2] recalculated');
+      indexArray[2] = tindexArray[2];his.randomIntFromInterval(0, numberOfBerries - 1);
+    }
+
+    console.log('indexArray[2]: ', indexArray[2]);
+    return indexArray;
   }
 
-  renderthreeberries() {
-    console.log('hello from renderBerry');
-    console.log(this.state.berryArray);
+  randomIntFromInterval(min, max) {
+    this.hello = 'hoihoi';
+    return Math.floor((Math.random() * (max - min + 1)) + min);
+  }
+
+  renderthreeberries(allBerriesArray) {
+    // console.log('hello from renderthreeberries function');
+    // console.log(allBerriesArray);
+    if (allBerriesArray == '' || allBerriesArray.length == 0 || this.state.correctBerryIndex == '') {
+      return '';
+    }
+
+/*
+    const indexArray = this.getNextBerryIndexes(allBerriesArray.length);
+    const b1Index = indexArray[0];
+    const b2Index = indexArray[1];
+    const b3Index = indexArray[2];
+*/
+
+
+    const b1Index = this.state.berry1Index;
+    const b2Index = this.state.berry2Index;
+    const b3Index = this.state.berry3Index;
+
     if (this.state.berryArray != '' && this.state.berryArray.length >= 3) {
-      return(
+      return (
         <li><table>
           <tr>
             <td>
-              <img alt="some berry here hopefully" src={this.state.berryArray[0].berryURL} /> <br />
+              <Berry
+                berryname={this.state.berryArray[b1Index].berry_name}
+                berryURL={this.state.berryArray[b1Index].berryURL}
+              />
             </td>
             <td>
-              <img alt="some berry here hopefully" src={this.state.berryArray[1].berryURL} /> <br />
+              <Berry
+                berryname={this.state.berryArray[b2Index].berry_name}
+                berryURL={this.state.berryArray[b2Index].berryURL}
+              />
             </td>
             <td>
-              <img alt="some berry here hopefully" src={this.state.berryArray[2].berryURL} /> <br />
+              <Berry
+                berryname={this.state.berryArray[b3Index].berry_name}
+                berryURL={this.state.berryArray[b3Index].berryURL}
+              />
             </td>
           </tr>
         </table></li>);
     }
+    return '';
   }
-
-
-  /*
-  <ul>
-    {this.renderberryArray()}
-  </ul>
-
-
-  {this.state.berryArray != '' &&
-    <ul>
-      <h3>{this.state.berryArray.map((berry) => {
-        return (<li>berry.berry_name, berry.berryURL</li>);
-      })
-      }</h3>
-    </ul>
-  }
-
-  */
-
 
   render() {
     return (
@@ -153,9 +129,9 @@ export default class BerryQuiz extends Component {
           <a target="_blank" rel="noopener noreferrer" href="http://www.luontoon.fi/marjastusjasienestys/marjastus">http://www.luontoon.fi/marjastusjasienestys/marjastus</a>
         </p>
 
-        <h2>Which of these berries is blueberry (mustikka in Finnish)? </h2>
+        <h2>Which of these berries is {this.state.correctBerryName.toLowerCase()} ?</h2>
         <ul>
-          {this.renderthreeberries()}
+          { this.renderthreeberries(this.state.berryArray) }
         </ul>
 
 
