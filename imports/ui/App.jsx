@@ -1,11 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+// import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import BerryQuiz from './BerryQuiz.jsx';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
-import { Berries } from '../api/berries.js';
+// import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+// import { Berries } from '../api/berries.js';
 
 class App extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ App.propTypes = {
   // Removed berries collection from props, not sure if it is reactive like
   // this. Using Meteor method to get berries collection instead.
   // berries: PropTypes.array.isRequired,
-  currentUser: PropTypes.object,
+  // currentUser: PropTypes.object,
   // incompleteCount: PropTypes.number.isRequired,
 };
 

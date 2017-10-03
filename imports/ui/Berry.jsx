@@ -1,22 +1,38 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
 
 export default class Berry extends Component {
   constructor(props) {
     super(props);
-    this.state =
-    { selected: false };
-    // this.state.imageURL = this.getimage();
+    this.toggleImageClicked = this.toggleImageClicked.bind(this);
+  }
+
+  toggleImageClicked() {
+    this.props.cb(this.props.berryIndex);
   }
 
   render() {
+    const berryClassName = classnames({
+      checked: this.props.imageClicked,
+    });
+
     return (
-      <img alt={this.props.berryname} src={this.props.berryURL} />
+      <button onClick={this.toggleImageClicked}>
+        <img
+          className={berryClassName}
+          alt={this.props.berryName}
+          src={this.props.berryURL}
+        />
+      </button>
     );
   }
 }
 
 Berry.propTypes = {
-  berryname: PropTypes.string.isRequired,
+  berryName: PropTypes.string.isRequired,
   berryURL: PropTypes.string.isRequired,
+  berryIndex: PropTypes.number.isRequired,
+  imageClicked: PropTypes.bool.isRequired,
+  cb: PropTypes.func.isRequired,
 };
