@@ -35,10 +35,16 @@ header {
   display: inline;
 }
 
-.button = {
-  float: center;
+p.correctAnswer {
+  text-emphasis-style: circle;
+  text-emphasis-color: green;
+  font-weight: bold;
+}
+
+.button {
+  /** float: center; */
   margin: '10px 10px 10px 0'
-};
+}
 
 div {
     margin-top: 10px;
