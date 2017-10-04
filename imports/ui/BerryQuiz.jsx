@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import Berry from './Berry.jsx';
 import Answered from './Answered.jsx';
+import { randomIntFromInterval } from './helper_funcs.js';
 
 export default class BerryQuiz extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ export default class BerryQuiz extends Component {
             berryArray: result,
           });
           const berryIndexArray = this.getNextBerryIndexes(this.state.berryArray.length);
-          const chosenBerryIndex = berryIndexArray[this.randomIntFromInterval(0, 2)];
+          const chosenBerryIndex = berryIndexArray[randomIntFromInterval(0, 2)];
           const chosenBerryName = this.state.berryArray[chosenBerryIndex].berry_name;
           this.setState(
             { correctBerryIndex: chosenBerryIndex,
@@ -63,18 +64,18 @@ export default class BerryQuiz extends Component {
     this.hello = 'hello';
     const indexArray = [];
     // console.log('numberOfBerries: ', numberOfBerries);
-    indexArray[0] = this.randomIntFromInterval(0, numberOfBerries - 1);
+    indexArray[0] = randomIntFromInterval(0, numberOfBerries - 1);
     // console.log('indexArray[0]: ', indexArray[0]);
-    indexArray[1] = this.randomIntFromInterval(0, numberOfBerries - 1);
+    indexArray[1] = randomIntFromInterval(0, numberOfBerries - 1);
     while (indexArray[1] === indexArray[0]) {
       // console.log('duplicate indexArray[1] recalculated');
-      indexArray[1] = this.randomIntFromInterval(0, numberOfBerries - 1);
+      indexArray[1] = randomIntFromInterval(0, numberOfBerries - 1);
     }
     // console.log('indexArray[1]: ', indexArray[1]);
-    indexArray[2] = this.randomIntFromInterval(0, numberOfBerries - 1);
+    indexArray[2] = randomIntFromInterval(0, numberOfBerries - 1);
     while (indexArray[2] === indexArray[1] || indexArray[2] === indexArray[0]) {
       // console.log('duplicate indexArray[2] recalculated');
-      indexArray[2] = this.randomIntFromInterval(0, numberOfBerries - 1);
+      indexArray[2] = randomIntFromInterval(0, numberOfBerries - 1);
     }
 
     // console.log('indexArray[2]: ', indexArray[2]);
@@ -102,11 +103,6 @@ export default class BerryQuiz extends Component {
         berry3Checked: true,
       });
     }
-  }
-
-  randomIntFromInterval(min, max) {
-    this.hello = 'hoihoi';
-    return Math.floor((Math.random() * ((max - min) + 1)) + min);
   }
 
   updatePoints(berryIndex) {
@@ -221,10 +217,11 @@ export default class BerryQuiz extends Component {
   }
 }
 
+/**
 export function sumtwonumbers(a, b) {
   return (a + b);
 }
-
+*/
 
 BerryQuiz.propTypes = {
   // berryname: PropTypes.string,
