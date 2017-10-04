@@ -5,7 +5,27 @@ import Berry from './Berry.jsx';
 import Answered from './Answered.jsx';
 import { randomIntFromInterval } from './helper_funcs.js';
 
+const QUIZ_LENGTH = 3;
+
 export default class BerryQuiz extends Component {
+  static getNextBerryIndexes(numberOfBerries) {
+    const indexArray = [];
+    // console.log('numberOfBerries: ', numberOfBerries);
+    indexArray[0] = randomIntFromInterval(0, numberOfBerries - 1);
+    // console.log('indexArray[0]: ', indexArray[0]);
+    indexArray[1] = randomIntFromInterval(0, numberOfBerries - 1);
+    while (indexArray[1] === indexArray[0]) {
+      // console.log('duplicate indexArray[1] recalculated');
+      indexArray[1] = randomIntFromInterval(0, numberOfBerries - 1);
+    }
+    // console.log('indexArray[1]: ', indexArray[1]);
+    indexArray[2] = randomIntFromInterval(0, numberOfBerries - 1);
+    while (indexArray[2] === indexArray[1] || indexArray[2] === indexArray[0]) {
+      // console.log('duplicate indexArray[2] recalculated');
+      indexArray[2] = randomIntFromInterval(0, numberOfBerries - 1);
+    }
+    return indexArray;
+  }
   constructor(props) {
     super(props);
     this.state =
@@ -20,9 +40,11 @@ export default class BerryQuiz extends Component {
       berry1Checked: false,
       berry2Checked: false,
       berry3Checked: false,
-      points: 0 };
+      points: 0,
+      nbr_questions: 0,
+      quizFinished: false };
     this.handleBerryClick = this.handleBerryClick.bind(this);
-    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +62,7 @@ export default class BerryQuiz extends Component {
           this.setState({
             berryArray: result,
           });
-          const berryIndexArray = this.getNextBerryIndexes(this.state.berryArray.length);
+          const berryIndexArray = BerryQuiz.getNextBerryIndexes(this.state.berryArray.length);
           const chosenBerryIndex = berryIndexArray[randomIntFromInterval(0, 2)];
           const chosenBerryName = this.state.berryArray[chosenBerryIndex].berry_name;
           this.setState(
@@ -57,29 +79,6 @@ export default class BerryQuiz extends Component {
         }
       }
     });
-  }
-
-
-  getNextBerryIndexes(numberOfBerries) {
-    this.hello = 'hello';
-    const indexArray = [];
-    // console.log('numberOfBerries: ', numberOfBerries);
-    indexArray[0] = randomIntFromInterval(0, numberOfBerries - 1);
-    // console.log('indexArray[0]: ', indexArray[0]);
-    indexArray[1] = randomIntFromInterval(0, numberOfBerries - 1);
-    while (indexArray[1] === indexArray[0]) {
-      // console.log('duplicate indexArray[1] recalculated');
-      indexArray[1] = randomIntFromInterval(0, numberOfBerries - 1);
-    }
-    // console.log('indexArray[1]: ', indexArray[1]);
-    indexArray[2] = randomIntFromInterval(0, numberOfBerries - 1);
-    while (indexArray[2] === indexArray[1] || indexArray[2] === indexArray[0]) {
-      // console.log('duplicate indexArray[2] recalculated');
-      indexArray[2] = randomIntFromInterval(0, numberOfBerries - 1);
-    }
-
-    // console.log('indexArray[2]: ', indexArray[2]);
-    return indexArray;
   }
 
   setBerryCheckedStates(berryIndex) {
@@ -111,27 +110,35 @@ export default class BerryQuiz extends Component {
         points: this.state.points + 1,
         answered: true,
         correctlyAnswered: true,
+        // nbr_questions: this.state.nbr_questions + 1,
       });
     } else {
       this.setState({
         answered: true,
         correctlyAnswered: false,
+        // nbr_questions: this.state.nbr_questions + 1,
       });
     }
   }
 
   handleBerryClick(berryIndex) {
-    // if user has already answered then don't do anything
     if (!this.state.answered) {
-      // if user has already answered then don't do anything
       this.setBerryCheckedStates(berryIndex);
       this.updatePoints(berryIndex);
+
+      if (this.state.nbr_questions + 1 >= QUIZ_LENGTH) {
+        this.setState({ quizFinished: true });
+      }
     }
+    // if user has already answered then don't do anything
   }
 
-  handleButtonClick() {
-    this.getBerriesInClient();
-    // console.log('BerryQuiz, handleButtonClick()');
+  handleNextButtonClick() {
+    if (this.state.nbr_questions + 1 < QUIZ_LENGTH) {
+      this.getBerriesInClient();
+      this.setState({ nbr_questions: this.state.nbr_questions + 1 });
+    }
+    // console.log('BerryQuiz, handleNextButtonClick()');
   }
 
   // TODO: get rid of unnecessary global variables
@@ -199,15 +206,20 @@ export default class BerryQuiz extends Component {
           { this.renderthreeberries(this.state.berryArray) }
         </ul>
 
-        <Answered answered={this.state.answered} correctlyAnswered={this.state.correctlyAnswered} />
+        <Answered
+          answered={this.state.answered}
+          correctlyAnswered={this.state.correctlyAnswered}
+          quizFinished={this.state.quizFinished}
+        />
 
         <h2>Current points: {this.state.points}</h2>
+        <h4>Question: {this.state.nbr_questions + 1} / {QUIZ_LENGTH} </h4>
         <p>
           <button
             className=".button"
             // had to google the below one
             // https://stackoverflow.com/questions/33846682/react-onclick-function-fires-on-render
-            onClick={() => this.handleButtonClick()}
+            onClick={() => this.handleNextButtonClick()}
           >Next question
           </button>
         </p>
@@ -216,12 +228,6 @@ export default class BerryQuiz extends Component {
     );
   }
 }
-
-/**
-export function sumtwonumbers(a, b) {
-  return (a + b);
-}
-*/
 
 BerryQuiz.propTypes = {
   // berryname: PropTypes.string,

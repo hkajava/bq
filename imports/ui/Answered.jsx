@@ -14,16 +14,29 @@ export default class Answered extends Component {
     return '';
   }
 
+  quizEndResponse() {
+    if (this.props.quizFinished) {
+      // add restart game feature
+      // return 'Quiz Finished. Press restart to play again!';
+      return 'Quiz Finished.';
+    }
+    return '';
+  }
+
+
   render() {
     const answeredClassName = classnames({
       correctAnswer: this.props.correctlyAnswered,
     });
 
     return (
-      <p
-        className={answeredClassName}
-      >{this.createResponse()}
-      </p>
+      <div>
+        <p
+          className={answeredClassName}
+        >{this.createResponse()}
+        </p>
+        <h2>{this.quizEndResponse()}</h2>
+      </div>
     );
   }
 }
@@ -31,4 +44,5 @@ export default class Answered extends Component {
 Answered.propTypes = {
   answered: PropTypes.bool.isRequired,
   correctlyAnswered: PropTypes.bool.isRequired,
+  quizFinished: PropTypes.bool.isRequired,
 };
