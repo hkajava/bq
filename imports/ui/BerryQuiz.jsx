@@ -29,11 +29,11 @@ export default class BerryQuiz extends Component {
   }
 
   getBerriesInClient() {
-    Meteor.call('getBerriesToArray', (error, result) => {
+    Meteor.call('berries.getBerriesToArray', (error, result) => {
       if (error) {
         // console.log(error.reason);
       } else if (result) {
-        // console.log('getBerriesToArray returned result: ', result);
+        // console.log('berries.getBerriesToArray returned result: ', result);
         if (result !== undefined && result !== null) {
           // console.log('JEEJEE');
           this.setState({

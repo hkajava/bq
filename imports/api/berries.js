@@ -52,6 +52,7 @@ Meteor.methods({
     }
     return undefined;
   },
+  /**
   'getBerriesToArray'() {
     // check(text, String);
     let berryArray = [];
@@ -65,8 +66,19 @@ Meteor.methods({
       // console.log('inside client, method getBerry');
     }
     return berryArray;
+    },
+  */
+  'berries.getBerriesToArray'() {
+    // check(text, String);
+    let berryArray = [];
+    if (Meteor.isServer) {
+      console.log('inside server, method getBerriesToArray');
+    } else {
+      console.log('inside client, method getBerriesToArray');
+    }
+    berryArray = Berries.find().fetch();
+    return berryArray;
   },
-
   'berries.insert'(text) {
     check(text, String);
 
