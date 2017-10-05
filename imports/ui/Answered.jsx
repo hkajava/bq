@@ -30,13 +30,11 @@ export default class Answered extends Component {
     });
 
     return (
-      <div>
-        <p
-          className={answeredClassName}
-        >{this.createResponse()}
-        </p>
-        <h2>{this.quizEndResponse()}</h2>
-      </div>
+      <h2
+        className={answeredClassName}
+      >{this.createResponse()}
+        <br /><br />{this.quizEndResponse()}
+      </h2>
     );
   }
 }

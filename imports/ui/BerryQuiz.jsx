@@ -157,7 +157,7 @@ export default class BerryQuiz extends Component {
       return (
         <li><table><tbody>
           <tr>
-            <td>
+            <td width="220px" height="140px">
               <Berry
                 berryName={this.state.berryArray[b1Index].berry_name}
                 berryURL={this.state.berryArray[b1Index].berryURL}
@@ -166,7 +166,7 @@ export default class BerryQuiz extends Component {
                 cb={this.handleBerryClick}
               />
             </td>
-            <td>
+            <td width="220px" height="140px">
               <Berry
                 berryName={this.state.berryArray[b2Index].berry_name}
                 berryURL={this.state.berryArray[b2Index].berryURL}
@@ -175,7 +175,7 @@ export default class BerryQuiz extends Component {
                 cb={this.handleBerryClick}
               />
             </td>
-            <td>
+            <td width="220px" height="140px">
               <Berry
                 berryName={this.state.berryArray[b3Index].berry_name}
                 berryURL={this.state.berryArray[b3Index].berryURL}
