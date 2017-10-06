@@ -5,7 +5,7 @@ import Berry from './Berry.jsx';
 import Answered from './Answered.jsx';
 import { randomIntFromInterval } from './helper_funcs.js';
 
-const QUIZ_LENGTH = 3;
+const QUIZ_LENGTH = 10;
 
 export default class BerryQuiz extends Component {
   static getNextBerryIndexes(numberOfBerries) {
