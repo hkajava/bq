@@ -12,7 +12,18 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.newGame = this.newGame.bind(this);
+    this.state = {
+      game: () => <BerryQuiz />,
+    };
   }
+
+  newGame () {
+    this.setState({
+      game: () => <BerryQuiz />,
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     // Find the text field via the React ref
@@ -28,12 +39,14 @@ class App extends Component {
   }
 
   render() {
+    const ActiveGame = this.state.game;
     return (
       <div className="container">
         <header>
           {/** <AccountsUIWrapper /> */}
         </header>
-        <BerryQuiz />
+        <ActiveGame />
+        <button onClick={this.newGame}>RESTART GAME</button>
       </div>
     );
   }
