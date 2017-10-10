@@ -21,6 +21,7 @@ body {
 td {
   width: 220px;
   height: 140px;
+  padding: 20px;
 }
 */
 
@@ -53,6 +54,9 @@ p.correctAnswer {
   /** margin: '10px 10px 10px 0'; */
 }
 
+div {
+    margin-left: 5px;
+}
 /**
 div {
     margin-top: 10px;
@@ -69,10 +73,6 @@ h1 {
   margin-bottom: 10px;
   display: inline-block;
   margin-right: 1em;
-}
-
-td {
-    padding: 20px;
 }
 
 form {
@@ -138,8 +138,8 @@ li.private {
 }
 
 img {
-  width: 200px;
-  height: 130px;
+  max-width: 150px;
+  max-height: 100px;
 }
 
 img.checked {

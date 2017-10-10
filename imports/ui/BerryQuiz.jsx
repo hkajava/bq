@@ -49,6 +49,7 @@ export default class BerryQuiz extends Component {
 
   componentDidMount() {
     this.getBerriesInClient();
+    // console.log('inside componentDidMount');
   }
 
   getBerriesInClient() {
@@ -155,9 +156,9 @@ export default class BerryQuiz extends Component {
 
     if (this.state.berryArray !== '' && this.state.berryArray.length >= 3) {
       return (
-        <li><table><tbody>
+        <table><tbody>
           <tr>
-            <td width="220px" height="140px">
+            <td>
               <Berry
                 berryName={this.state.berryArray[b1Index].berry_name}
                 berryURL={this.state.berryArray[b1Index].berryURL}
@@ -166,7 +167,7 @@ export default class BerryQuiz extends Component {
                 cb={this.handleBerryClick}
               />
             </td>
-            <td width="220px" height="140px">
+            <td>
               <Berry
                 berryName={this.state.berryArray[b2Index].berry_name}
                 berryURL={this.state.berryArray[b2Index].berryURL}
@@ -175,7 +176,7 @@ export default class BerryQuiz extends Component {
                 cb={this.handleBerryClick}
               />
             </td>
-            <td width="220px" height="140px">
+            <td>
               <Berry
                 berryName={this.state.berryArray[b3Index].berry_name}
                 berryURL={this.state.berryArray[b3Index].berryURL}
@@ -185,7 +186,7 @@ export default class BerryQuiz extends Component {
               />
             </td>
           </tr>
-        </tbody></table></li>);
+        </tbody></table>);
     }
     return '';
   }
@@ -194,26 +195,16 @@ export default class BerryQuiz extends Component {
   render() {
     return (
       <div>
-        <h1>BerryQuiz!</h1>
+        <h2>BerryQuiz!</h2>
         <p> This is a simple quiz application to investigate the potential of
             Meteor/React web application technology and learn to recognize
             Finnish wild berries. The images have been taken from <br />
           <a target="_blank" rel="noopener noreferrer" href="http://www.luontoon.fi/marjastusjasienestys/marjastus">http://www.luontoon.fi/marjastusjasienestys/marjastus</a>
         </p>
-
-        <h2>Which of these berries is {this.state.correctBerryName.toLowerCase()} ?</h2>
-        <ul>
-          { this.renderthreeberries(this.state.berryArray) }
-        </ul>
-
-        <Answered
-          answered={this.state.answered}
-          correctlyAnswered={this.state.correctlyAnswered}
-          quizFinished={this.state.quizFinished}
-        />
-
-        <h2>Current points: {this.state.points}</h2>
-        <h4>Question: {this.state.nbr_questions + 1} / {QUIZ_LENGTH} </h4>
+        <h3>Which of these berries is {this.state.correctBerryName.toLowerCase()} ?</h3>
+        { this.renderthreeberries(this.state.berryArray) }
+        <p>Current points: {this.state.points}<br />
+        Question: {this.state.nbr_questions + 1} / {QUIZ_LENGTH} </p>
         <p>
           <button
             className=".button"
@@ -223,7 +214,11 @@ export default class BerryQuiz extends Component {
           >Next question
           </button>
         </p>
-
+        <Answered
+          answered={this.state.answered}
+          correctlyAnswered={this.state.correctlyAnswered}
+          quizFinished={this.state.quizFinished}
+        />
       </div>
     );
   }
