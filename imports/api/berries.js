@@ -72,9 +72,9 @@ Meteor.methods({
     // check(text, String);
     let berryArray = [];
     if (Meteor.isServer) {
-      console.log('inside server, method getBerriesToArray');
+      // console.log('inside server, method getBerriesToArray');
     } else {
-      console.log('inside client, method getBerriesToArray');
+      // console.log('inside client, method getBerriesToArray');
     }
     berryArray = Berries.find().fetch();
     return berryArray;
