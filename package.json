@@ -4,7 +4,8 @@
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint --silent",
-    "deploy": "DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy berryquiz.eu.meteorapp.com --settings settings.json"
+    "deploy": "DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy berryquiz.eu.meteorapp.com --settings settings.json",
+    "deploy-delete": "DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy --delete berryquiz.eu.meteorapp.com"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
