@@ -2,9 +2,8 @@
 
 This is a simple quiz application to investigate the potential of
 Meteor/React web application technology and learn to recognize
-Finnish wild berries. The images have been taken from <br />
-<a target="_blank" rel="noopener noreferrer" href="http://www.luontoon.fi/marjastusjasienestys/marjastus">http://www.luontoon.fi/marjastusjasienestys/marjastus</a>
-
+Finnish wild berries. The images have been taken from <a target="_blank" rel="noopener noreferrer" href="http://www.wikipedia.com">
+ Wikipedia</a>.
 
 ## Getting Started
 

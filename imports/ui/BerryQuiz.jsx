@@ -31,6 +31,7 @@ export default class BerryQuiz extends Component {
     this.state =
     { berryArray: '',
       correctBerryName: '',
+      correctBerryNameFinnish: '',
       correctBerryIndex: '',
       answered: false,
       correctlyAnswered: false,
@@ -66,9 +67,11 @@ export default class BerryQuiz extends Component {
           const berryIndexArray = BerryQuiz.getNextBerryIndexes(this.state.berryArray.length);
           const chosenBerryIndex = berryIndexArray[randomIntFromInterval(0, 2)];
           const chosenBerryName = this.state.berryArray[chosenBerryIndex].berry_name;
+          const chosenBerryNameFinnish = this.state.berryArray[chosenBerryIndex].berry_name_in_Finnish;
           this.setState(
             { correctBerryIndex: chosenBerryIndex,
               correctBerryName: chosenBerryName,
+              correctBerryNameFinnish: chosenBerryNameFinnish,
               answered: false,
               correctlyAnswered: false,
               berry1Index: berryIndexArray[0],
@@ -195,13 +198,15 @@ export default class BerryQuiz extends Component {
   render() {
     return (
       <div>
-        <h2>BerryQuiz!</h2>
+        <h1>BerryQuiz!</h1>
         <p> This is a simple quiz application to investigate the potential of
             Meteor/React web application technology and learn to recognize
-            Finnish wild berries. The images have been taken from <br />
-          <a target="_blank" rel="noopener noreferrer" href="http://www.luontoon.fi/marjastusjasienestys/marjastus">http://www.luontoon.fi/marjastusjasienestys/marjastus</a>
+            Finnish wild berries.
+            The images have been taken from <a target="_blank" rel="noopener noreferrer" href="http://www.wikipedia.com">
+            Wikipedia</a>.
         </p>
-        <h3>Which of these berries is {this.state.correctBerryName.toLowerCase()} ?</h3>
+        <h3>Which of these berries is {this.state.correctBerryName.toLowerCase()}
+           ({this.state.correctBerryNameFinnish.toLowerCase()})?</h3>
         { this.renderthreeberries(this.state.berryArray) }
         <p>Current points: {this.state.points}<br />
         Question: {this.state.nbr_questions + 1} / {QUIZ_LENGTH} </p>
