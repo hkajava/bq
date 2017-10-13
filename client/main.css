@@ -138,8 +138,8 @@ li.private {
 }
 
 img {
-  max-width: 200px;
-  max-height: 150px;
+  width: 250px;
+  height: 200px;
 }
 
 img.checked {
