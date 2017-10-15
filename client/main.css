@@ -139,7 +139,7 @@ li.private {
 
 img {
   width: 250px;
-  height: 200px;
+  height: auto;
 }
 
 img.checked {

@@ -43,7 +43,8 @@ export default class BerryQuiz extends Component {
       berry3Checked: false,
       points: 0,
       nbr_questions: 0,
-      quizFinished: false };
+      quizFinished: false,
+      answerGiven: false };
     this.handleBerryClick = this.handleBerryClick.bind(this);
     this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
   }
@@ -66,8 +67,9 @@ export default class BerryQuiz extends Component {
           });
           const berryIndexArray = BerryQuiz.getNextBerryIndexes(this.state.berryArray.length);
           const chosenBerryIndex = berryIndexArray[randomIntFromInterval(0, 2)];
-          const chosenBerryName = this.state.berryArray[chosenBerryIndex].berry_name;
-          const chosenBerryNameFinnish = this.state.berryArray[chosenBerryIndex].berry_name_in_Finnish;
+          const chosenBerryName = this.state.berryArray[chosenBerryIndex].berryName;
+          const chosenBerryNameFinnish =
+            this.state.berryArray[chosenBerryIndex].berryNameInFinnish;
           this.setState(
             { correctBerryIndex: chosenBerryIndex,
               correctBerryName: chosenBerryName,
@@ -129,6 +131,7 @@ export default class BerryQuiz extends Component {
     if (!this.state.answered) {
       this.setBerryCheckedStates(berryIndex);
       this.updatePoints(berryIndex);
+      this.setState({ answerGiven: true });
 
       if (this.state.nbr_questions + 1 >= QUIZ_LENGTH) {
         this.setState({ quizFinished: true });
@@ -141,6 +144,7 @@ export default class BerryQuiz extends Component {
     if (this.state.nbr_questions + 1 < QUIZ_LENGTH) {
       this.getBerriesInClient();
       this.setState({ nbr_questions: this.state.nbr_questions + 1 });
+      this.setState({ answerGiven: false });
     }
     // console.log('BerryQuiz, handleNextButtonClick()');
   }
@@ -163,28 +167,40 @@ export default class BerryQuiz extends Component {
           <tr>
             <td>
               <Berry
-                berryName={this.state.berryArray[b1Index].berry_name}
+                berryName={this.state.berryArray[b1Index].berryName}
+                berryNameInFinnish={this.state.berryArray[b1Index].berryNameInFinnish}
+                authorName={this.state.berryArray[b1Index].authorName}
+                wikiURL={this.state.berryArray[b1Index].wikiURL}
                 berryURL={this.state.berryArray[b1Index].berryURL}
                 berryIndex={b1Index}
                 imageClicked={this.state.berry1Checked}
+                answerGiven={this.state.answerGiven}
                 cb={this.handleBerryClick}
               />
             </td>
             <td>
               <Berry
-                berryName={this.state.berryArray[b2Index].berry_name}
+                berryName={this.state.berryArray[b2Index].berryName}
+                berryNameInFinnish={this.state.berryArray[b2Index].berryNameInFinnish}
+                authorName={this.state.berryArray[b2Index].authorName}
+                wikiURL={this.state.berryArray[b2Index].wikiURL}
                 berryURL={this.state.berryArray[b2Index].berryURL}
                 berryIndex={b2Index}
                 imageClicked={this.state.berry2Checked}
+                answerGiven={this.state.answerGiven}
                 cb={this.handleBerryClick}
               />
             </td>
             <td>
               <Berry
-                berryName={this.state.berryArray[b3Index].berry_name}
+                berryName={this.state.berryArray[b3Index].berryName}
+                berryNameInFinnish={this.state.berryArray[b3Index].berryNameInFinnish}
+                authorName={this.state.berryArray[b3Index].authorName}
+                wikiURL={this.state.berryArray[b3Index].wikiURL}
                 berryURL={this.state.berryArray[b3Index].berryURL}
                 berryIndex={b3Index}
                 imageClicked={this.state.berry3Checked}
+                answerGiven={this.state.answerGiven}
                 cb={this.handleBerryClick}
               />
             </td>
