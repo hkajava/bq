@@ -205,7 +205,7 @@ export default class BerryQuiz extends Component {
               />
             </td>
           </tr>
-        </tbody></table>);
+        </tbody> </table>);
     }
     return '';
   }
