@@ -6,7 +6,7 @@ Finnish wild berries. The images have been taken from <a target="_blank" rel="no
  Wikipedia</a>.
 
 ![BQ screen cast](imports/filesforgithubREADME/bq_screencast_20171116.gif "BerryQuiz UI (css part not polished I know...)")
-The UI is not polished, responsive or otherwise cool. This was just a quick test to get more experience with Meteor and React frameworks. 
+The UI is not polished, responsive or otherwise cool. This was just a quick test to get more experience with Meteor and React frameworks.
 
 ## Getting Started
 
@@ -100,11 +100,6 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 * **Henri Kajava** - *Initial work* - (https://github.com/hkajava)
 
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-*
