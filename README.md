@@ -5,7 +5,7 @@ Meteor/React web application technology and learn to recognize
 Finnish wild berries. The images have been taken from <a target="_blank" rel="noopener noreferrer" href="http://www.wikipedia.com">
  Wikipedia</a>.
 
-![BQ screen cast](imports/imports/filesforgithubREADME/bq_screencast_20171116.gif "BerryQuiz UI (css part not polished I know...)")
+![BQ screen cast](imports/filesforgithubREADME/bq_screencast_20171116.gif "BerryQuiz UI (css part not polished I know...)")
 
 ## Getting Started
 
