@@ -6,6 +6,7 @@ Finnish wild berries. The images have been taken from <a target="_blank" rel="no
  Wikipedia</a>.
 
 ![BQ screen cast](imports/filesforgithubREADME/bq_screencast_20171116.gif "BerryQuiz UI (css part not polished I know...)")
+The UI is not polished, responsive or otherwise cool. This was just a quick test to get more experience with Meteor and React frameworks. 
 
 ## Getting Started
 
